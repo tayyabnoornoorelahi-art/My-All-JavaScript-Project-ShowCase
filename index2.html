@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Portfolio | All Live Demos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --success-color: #4cc9f0;
+            --warning-color: #ff9e00;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #fff, #f8f9fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+        }
+
+        /* Filter Section */
+        .filters {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            background-color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            color: var(--gray-color);
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-color);
+        }
+
+        /* Projects Grid */
+        .projects-container {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .badge-live {
+            background-color: rgba(76, 201, 240, 0.2);
+            color: #0a8ea8;
+        }
+
+        .badge-github {
+            background-color: rgba(33, 37, 41, 0.2);
+            color: var(--dark-color);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, #e9ecef, #dee2e6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(67, 97, 238, 0.1), rgba(58, 12, 163, 0.1));
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+        }
+
+        .project-category {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--gray-color);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-features {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-features ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .project-features li {
+            padding: 0.3rem 0;
+            color: var(--gray-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .project-features i {
+            color: var(--success-color);
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .btn {
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: #e9ecef;
+            color: var(--dark-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #dee2e6;
+            transform: translateY(-3px);
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #e68a00;
+            transform: translateY(-3px);
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            padding: 0.3rem 0.8rem;
+            background-color: #f1f3f5;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--gray-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 1rem;
+            color: var(--gray-color);
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #dee2e6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .stat-item {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .project-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Tayyab Project Portfolio</h1>
+            <p class="tagline">Complete collection with live demos and GitHub source code links of my JavaScript projects</p>
+            <div class="stats">
+                <div class="stat-item"><i class="fas fa-code"></i> 22 Projects</div>
+                <div class="stat-item"><i class="fas fa-check-circle"></i> 21 Live Demos</div>
+                <div class="stat-item"><i class="fab fa-github"></i> 22 GitHub Repos</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="filters">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="utility">Utility Tools</button>
+            <button class="filter-btn" data-filter="game">Games</button>
+            <button class="filter-btn" data-filter="ui">UI Components</button>
+            <button class="filter-btn" data-filter="productivity">Productivity</button>
+            <button class="filter-btn" data-filter="live">Live Demos</button>
+        </div>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search projects by name, tech, or features...">
+        </div>
+    </section>
+
+    <section class="projects-container">
+        <div class="projects-grid" id="projectsGrid">
+            <!-- Projects will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>🚀Tayyab Project Showcase Portfolio</p>
+            <div class="footer-links">
+                <a href="https://github.com/tayyabnoornoorelahi-art" target="_blank"><i class="fab fa-github"></i> GitHub Profile</a>
+                <a href="https://tayyabnoornoorelahi-art.github.io/" target="_blank"><i class="fas fa-globe"></i> Portfolio Home</a>
+            </div>
+            <p class="copyright">© 2023 | All projects built with HTML, CSS, and JavaScript</p>
+        </div>
+    </footer>
+
+    <script>
+        // Project data with ALL live demos and GitHub links
+        const projects = [
+            {
+                id: 1,
+                title: "Stopwatch",
+                url: "https://tayyabnoornoorelahi-art.github.io/Stop-Watch/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Stop-Watch",
+                category: "utility",
+                icon: "fas fa-stopwatch",
+                description: "A digital stopwatch application with start, pause, and reset functionality for precise time tracking.",
+                features: ["Digital time display", "Start/stop controls", "Lap tracking", "Responsive design"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 2,
+                title: "QR Code Generator",
+                url: "https://tayyabnoornoorelahi-art.github.io/QR-code-maker/",
+                github: "https://github.com/tayyabnoornoorelahi-art/QR-code-maker",
+                category: "utility",
+                icon: "fas fa-qrcode",
+                description: "Generate QR codes from text or URLs instantly. Perfect for sharing links and information.",
+                features: ["Text/URL input", "Instant generation", "Download option", "Customizable size"],
+                tech: ["HTML", "CSS", "JavaScript", "QR API"],
+                hasLiveDemo: true
+            },
+            {
+                id: 3,
+                title: "Background Color Changer",
+                url: "https://tayyabnoornoorelahi-art.github.io/bg-clr-changer/",
+                github: "https://github.com/tayyabnoornoorelahi-art/bg-clr-changer",
+                category: "ui",
+                icon: "fas fa-fill-drip",
+                description: "Interactive tool that changes the background color with a simple click. Great for testing color schemes.",
+                features: ["One-click color change", "Color code display", "Random color generator", "Hex/RGB values"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 4,
+                title: "Number to Words Converter",
+                url: "https://tayyabnoornoorelahi-art.github.io/Number-to-word-converter/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Number-to-word-converter",
+                category: "utility",
+                icon: "fas fa-calculator",
+                description: "Convert numeric values into their word representations. Useful for financial and documentation purposes.",
+                features: ["Number input", "Word translation", "Multiple languages", "Copy to clipboard"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 5,
+                title: "Text to Speech Converter",
+                url: "https://tayyabnoornoorelahi-art.github.io/Text-to-voice-converter/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Text-to-voice-converter",
+                category: "utility",
+                icon: "fas fa-volume-up",
+                description: "Transform written text into spoken words with customizable voice options and speech parameters.",
+                features: ["Text input", "Voice selection", "Speed/pitch control", "Play/pause functionality"],
+                tech: ["HTML", "CSS", "JavaScript", "Web Speech API"],
+                hasLiveDemo: true
+            },
+            {
+                id: 6,
+                title: "Emoji Rating System",
+                url: "https://tayyabnoornoorelahi-art.github.io/Rating-using-Emoji/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Rating-using-Emoji",
+                category: "ui",
+                icon: "fas fa-smile",
+                description: "Interactive rating component using emojis for more expressive user feedback collection.",
+                features: ["Emoji selection", "Rating display", "Hover effects", "Responsive design"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 7,
+                title: "Color Flipper",
+                url: "https://tayyabnoornoorelahi-art.github.io/Color-flipper/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Color-flipper",
+                category: "ui",
+                icon: "fas fa-palette",
+                description: "Random color generator that flips through colors and displays their hex codes for design inspiration.",
+                features: ["Random color generation", "Hex code display", "Simple/hex mode", "Copy color code"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 8,
+                title: "Counter Application",
+                url: "https://tayyabnoornoorelahi-art.github.io/Counter-Application/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Counter-Application",
+                category: "utility",
+                icon: "fas fa-plus-minus",
+                description: "A versatile counter with increment, decrement, and reset functionality for various counting needs.",
+                features: ["Increment/decrement", "Reset function", "Visual feedback", "Keyboard shortcuts"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 9,
+                title: "Todo List App",
+                url: "https://tayyabnoornoorelahi-art.github.io/To-do-list-App/",
+                github: "https://github.com/tayyabnoornoorelahi-art/To-do-list-App",
+                category: "productivity",
+                icon: "fas fa-tasks",
+                description: "Full-featured todo list application with task categorization, priority levels, and completion tracking.",
+                features: ["Task categorization", "Add/delete tasks", "Completion tracking", "Filter by category"],
+                tech: ["HTML", "CSS", "JavaScript", "LocalStorage"],
+                hasLiveDemo: true
+            },
+            {
+                id: 10,
+                title: "Bulb On/Off Demo",
+                url: "https://tayyabnoornoorelahi-art.github.io/Bulb/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Bulb",
+                category: "ui",
+                icon: "fas fa-lightbulb",
+                description: "Interactive bulb demonstration that toggles between on and off states with visual effects.",
+                features: ["Toggle functionality", "Visual effects", "Simple controls", "Realistic simulation"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 11,
+                title: "Background Changer",
+                url: "https://tayyabnoornoorelahi-art.github.io/background-changer/",
+                github: "https://github.com/tayyabnoornoorelahi-art/background-changer",
+                category: "ui",
+                icon: "fas fa-image",
+                description: "Dynamic background changer with multiple themes and transition effects for web pages.",
+                features: ["Multiple themes", "Transition effects", "Preset backgrounds", "Custom upload"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 12,
+                title: "FAQ Accordion",
+                url: "https://tayyabnoornoorelahi-art.github.io/General-Question-Accordian/",
+                github: "https://github.com/tayyabnoornoorelahi-art/General-Question-Accordian",
+                category: "ui",
+                icon: "fas fa-question-circle",
+                description: "Interactive accordion component for FAQ sections with smooth expand/collapse animations.",
+                features: ["Expand/collapse", "Smooth animations", "Multiple items", "Responsive design"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 13,
+                title: "Responsive Navbar",
+                url: "https://tayyabnoornoorelahi-art.github.io/Responsive-NavBar/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Responsive-NavBar",
+                category: "ui",
+                icon: "fas fa-bars",
+                description: "Fully responsive navigation bar with mobile menu toggle and smooth scrolling functionality.",
+                features: ["Mobile responsive", "Hamburger menu", "Smooth scrolling", "Active state"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 14,
+                title: "Reviews Component",
+                url: "https://tayyabnoornoorelahi-art.github.io/Rewiews/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Rewiews",
+                category: "ui",
+                icon: "fas fa-star",
+                description: "Interactive reviews display with user testimonials, ratings, and navigation between reviews.",
+                features: ["Multiple reviews", "Rating display", "Navigation arrows", "Auto-rotation"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 15,
+                title: "Tab Component",
+                url: "http://tayyabnoornoorelahi-art.github.io/Tabs/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Tabs",
+                category: "ui",
+                icon: "fas fa-folder",
+                description: "Tabbed interface component for organizing content into multiple panels within a single space.",
+                features: ["Tab switching", "Content panels", "Active states", "Smooth transitions"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 16,
+                title: "Todo List (Alternative)",
+                url: "https://tayyabnoornoorelahi-art.github.io/To-do-list-/",
+                github: "https://github.com/tayyabnoornoorelahi-art/To-do-list-",
+                category: "productivity",
+                icon: "fas fa-check-square",
+                description: "Alternative todo list implementation with different features and user interface design.",
+                features: ["Task management", "Priority levels", "Due dates", "Progress tracking"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 17,
+                title: "Number Guessing Game",
+                url: "https://tayyabnoornoorelahi-art.github.io/Guess-My-number-game/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Guess-My-number-game",
+                category: "game",
+                icon: "fas fa-dice",
+                description: "Interactive number guessing game where players try to guess a randomly generated number.",
+                features: ["Random number generation", "Hint system", "Score tracking", "Difficulty levels"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 18,
+                title: "Tic Tac Toe Game",
+                url: "https://tayyabnoornoorelahi-art.github.io/TicTacToe-Game/",
+                github: "https://github.com/tayyabnoornoorelahi-art/TicTacToe-Game",
+                category: "game",
+                icon: "fas fa-times",
+                description: "Classic Tic Tac Toe game with two-player mode, win detection, and score tracking.",
+                features: ["Two-player mode", "Win detection", "Score tracking", "Reset game"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 19,
+                title: "Post Liking Feature",
+                url: "https://tayyabnoornoorelahi-art.github.io/post-liking-feature/",
+                github: "https://github.com/tayyabnoornoorelahi-art/post-liking-feature",
+                category: "ui",
+                icon: "fas fa-heart",
+                description: "Social media style liking feature with animated hearts and like count functionality.",
+                features: ["Like animation", "Count increment", "Visual feedback", "Persistent state"],
+                tech: ["HTML", "CSS", "JavaScript"],
+                hasLiveDemo: true
+            },
+            {
+                id: 20,
+                title: "Counter App (Alternative)",
+                url: "https://tayyabnoornoorelahi-art.github.io/Counter-App/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Counter-App",
+                category: "utility",
+                icon: "fas fa-calculator",
+                description: "Alternative counter application with additional features and different user interface.",
+                features: ["Multiple counters", "Save/load state", "History tracking", "Custom limits"],
+                tech: ["HTML", "CSS", "JavaScript", "LocalStorage"],
+                hasLiveDemo: true
+            },
+            {
+                id: 21,
+                title: "Country Guide",
+                url: "https://tayyabnoornoorelahi-art.github.io/Country-guider/",
+                github: "https://github.com/tayyabnoornoorelahi-art/Country-guider",
+                category: "utility",
+                icon: "fas fa-globe-americas",
+                description: "Country information guide with details about flags, populations, capitals, and more.",
+                features: ["Country search", "Detailed information", "Flag display", "Regional filtering"],
+                tech: ["HTML", "CSS", "JavaScript", "REST API"],
+                hasLiveDemo: true
+            }
+        ];
+
+        // DOM elements
+        const projectsGrid = document.getElementById('projectsGrid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const searchInput = document.getElementById('searchInput');
+        let currentFilter = 'all';
+        let currentSearch = '';
+
+        // Initialize the projects grid
+        function renderProjects() {
+            projectsGrid.innerHTML = '';
+            
+            // Filter projects based on active filter and search
+            const filteredProjects = projects.filter(project => {
+                const matchesFilter = currentFilter === 'all' ? true :
+                    currentFilter === 'live' ? project.hasLiveDemo :
+                    project.category === currentFilter;
+                    
+                const matchesSearch = currentSearch === '' || 
+                    project.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    project.description.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    project.category.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    project.tech.some(tech => tech.toLowerCase().includes(currentSearch.toLowerCase())) ||
+                    project.features.some(feature => 
+                        feature.toLowerCase().includes(currentSearch.toLowerCase())
+                    );
+                
+                return matchesFilter && matchesSearch;
+            });
+            
+            // Show empty state if no projects match
+            if (filteredProjects.length === 0) {
+                projectsGrid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h3>No projects found</h3>
+                        <p>Try adjusting your search or filter to find what you're looking for.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Render filtered projects
+            filteredProjects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                
+                // Badge for live demo
+                const liveBadge = project.hasLiveDemo 
+                    ? `<div class="project-badge badge-live"><i class="fas fa-bolt"></i> Live Demo</div>`
+                    : '';
+                
+                // Determine button states
+                const viewButton = project.hasLiveDemo
+                    ? `<a href="${project.url}" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> View Demo</a>`
+                    : `<a href="${project.github}" target="_blank" class="btn btn-warning"><i class="fab fa-github"></i> View Source</a>`;
+                
+                const githubButton = `<a href="${project.github}" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> Source Code</a>`;
+                
+                projectCard.innerHTML = `
+                    ${liveBadge}
+                    <div class="project-image">
+                        <i class="${project.icon}"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">${project.title}</h3>
+                        <div class="project-category">${project.category.charAt(0).toUpperCase() + project.category.slice(1)}</div>
+                        
+                        <div class="tech-stack">
+                            ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                        
+                        <p class="project-description">${project.description}</p>
+                        
+                        <div class="project-features">
+                            <ul>
+                                ${project.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="project-actions">
+                            ${viewButton}
+                            ${githubButton}
+                        </div>
+                    </div>
+                `;
+                
+                projectsGrid.appendChild(projectCard);
+            });
+        }
+
+        // Filter projects by category
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                // Update current filter
+                currentFilter = button.getAttribute('data-filter');
+                // Re-render projects
+                renderProjects();
+            });
+        });
+
+        // Search projects
+        searchInput.addEventListener('input', () => {
+            currentSearch = searchInput.value;
+            renderProjects();
+        });
+
+        // Initial render
+        renderProjects();
+    </script>
+</body>
+</html>
